@@ -1,4 +1,6 @@
 /* TECH9 Main Styles - Part 1 */
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
 :root {
     --luxury-pink: #e0115f;
     --luxury-pink-dark: #b50d4d;
@@ -11,6 +13,7 @@
     --font-display: 'Bebas Neue', sans-serif;
     --font-body: 'Montserrat', sans-serif;
     --font-serif: 'Playfair Display', serif;
+    --font-gta: 'Righteous', sans-serif;
     --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
@@ -200,6 +203,20 @@ nav.scrolled {
     color: #fff;
     margin-bottom: 1rem;
     letter-spacing: 0.05em;
+}
+
+.hero-title.gta-font {
+    font-family: var(--font-gta);
+    font-size: clamp(4rem, 14vw, 11rem);
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-shadow: 
+        3px 3px 0px #000,
+        6px 6px 0px rgba(224, 17, 95, 0.8),
+        9px 9px 0px rgba(255, 107, 53, 0.6),
+        12px 12px 20px rgba(0, 0, 0, 0.5);
+    transform: skewX(-8deg);
 }
 
 .hero-title span {
