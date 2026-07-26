@@ -11,26 +11,58 @@
     <link rel="stylesheet" href="styles-part1.css">
     <link rel="stylesheet" href="styles-part2.css">
     <style>
+        /* Global Styles */
+        body {
+            background: url('gbackground.jpg') center/cover fixed no-repeat;
+            background-attachment: fixed;
+        }
+
         .gta-font, .section-title, .nav-logo, .footer-logo {
             font-family: 'Druk Wide', sans-serif;
             font-weight: 700;
             letter-spacing: 0.02em;
         }
 
-        .hero-title {
-            font-family: 'Druk Wide', sans-serif;
-            font-weight: 700;
-            letter-spacing: 0.02em;
+        /* Hero Section - Premium Layout */
+        .hero {
+            position: relative;
+            padding: 60px 20px 80px;
+            background: transparent;
+            min-height: auto;
+        }
+
+        .hero-bg {
             display: none;
         }
 
-        .hero-title-image {
-            max-width: 100%;
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+
+        /* Hero Image Container */
+        .hero-image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 100%;
-            height: auto;
-            display: block;
+            max-width: 900px;
             margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero-image-container img {
+            max-width: 100%;
+            height: auto;
+            width: 100%;
+            object-fit: contain;
+            display: block;
             animation: fadeInDown 0.8s ease-out;
+            filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.5));
         }
 
         @keyframes fadeInDown {
@@ -42,6 +74,71 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        /* Hero Badge */
+        .hero-badge {
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        /* Text Content Container */
+        .hero-text-content {
+            text-align: center;
+            max-width: 700px;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-headline {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero-desc {
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .hero-tagline {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ff006e;
+            margin-bottom: 30px;
+        }
+
+        /* Buttons Container */
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* Scroll Hint */
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
         }
 
         /* Premium Video Section */
@@ -86,6 +183,7 @@
             width: 100%;
             max-width: 1000px;
             margin: 0 auto;
+            padding: 0 20px;
         }
 
         .video-frame {
@@ -153,6 +251,7 @@
             margin-top: 40px;
             padding-top: 40px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            flex-wrap: wrap;
         }
 
         .control-btn {
@@ -229,10 +328,12 @@
             padding-top: 50px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
+            flex-wrap: wrap;
         }
 
         .stat {
             flex: 1;
+            min-width: 150px;
         }
 
         .stat-number {
@@ -247,6 +348,76 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 20px 60px;
+            }
+
+            .hero-content {
+                gap: 30px;
+            }
+
+            .hero-headline {
+                font-size: 22px;
+            }
+
+            .video-showcase-title {
+                font-size: 32px;
+            }
+
+            .video-stats {
+                gap: 30px;
+            }
+
+            .stat-number {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 30px 15px 50px;
+            }
+
+            .hero-image-container {
+                max-width: 100%;
+            }
+
+            .hero-headline {
+                font-size: 18px;
+            }
+
+            .hero-desc {
+                font-size: 14px;
+            }
+
+            .hero-tagline {
+                font-size: 16px;
+            }
+
+            .hero-buttons {
+                gap: 10px;
+            }
+
+            .video-showcase-title {
+                font-size: 24px;
+            }
+
+            .video-showcase-desc {
+                font-size: 14px;
+            }
+
+            .video-stats {
+                gap: 20px;
+                flex-direction: column;
+            }
+
+            .stat {
+                min-width: 100%;
+            }
         }
     </style>
 </head>
@@ -264,17 +435,22 @@
     </nav>
 
     <section class="hero" id="hero">
-        <div class="hero-bg" style="background: url('gbackground.jpg') center/cover no-repeat;"></div>
+        <div class="hero-bg"></div>
         <div class="hero-content">
-            <div class="hero-badge">LIMITED EVENT</div>
-            <h1 class="hero-title reveal"></h1>
-            <img src="gcover.jpg" alt="Grand Theft Auto VI" class="hero-title-image reveal" style="max-width: 500px;">
-            <p class="hero-headline reveal">The Next Generation Open-World Experience</p>
-            <p class="hero-desc reveal">Step into a city where every street tells a story, every choice creates new opportunities, and every journey is yours to shape.</p>
-            <p class="hero-tagline reveal">A Living City. Endless Possibilities.</p>
-            <div class="hero-buttons reveal">
-                <button class="btn btn-primary" onclick="document.getElementById('access').scrollIntoView({behavior:'smooth'})">ACCESS EVENT</button>
-                <button class="btn btn-secondary" onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'})">WATCH TRAILER</button>
+            <div class="hero-badge reveal">LIMITED EVENT</div>
+            
+            <div class="hero-image-container reveal">
+                <img src="gcover.jpg" alt="Grand Theft Auto VI - Key Art" />
+            </div>
+            
+            <div class="hero-text-content reveal">
+                <p class="hero-headline">The Next Generation Open-World Experience</p>
+                <p class="hero-desc">Step into a city where every street tells a story, every choice creates new opportunities, and every journey is yours to shape.</p>
+                <p class="hero-tagline">A Living City. Endless Possibilities.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="document.getElementById('access').scrollIntoView({behavior:'smooth'})">ACCESS EVENT</button>
+                    <button class="btn btn-secondary" onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'})">WATCH TRAILER</button>
+                </div>
             </div>
         </div>
         <div class="scroll-hint">Scroll to explore</div>
