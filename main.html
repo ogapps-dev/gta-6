@@ -16,6 +16,55 @@
             font-weight: 700;
             letter-spacing: 0.02em;
         }
+
+        .hero-video-container {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-bottom: 56.25%;
+            overflow: hidden;
+            margin: 40px 0;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .video-btn {
+            background: linear-gradient(135deg, #ff006e, #d62828);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        .video-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 0, 110, 0.4);
+        }
+
+        .video-btn:active {
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
@@ -32,7 +81,7 @@
     </nav>
 
     <section class="hero" id="hero">
-        <div class="hero-bg" style="background: url('gbackground.jpg') center/cover no-repeat;"></div>
+        <div class="hero-bg" style="background: url('gcover.jpg') center/cover no-repeat;"></div>
         <div class="hero-content">
             <div class="hero-badge">LIMITED EVENT</div>
             <h1 class="hero-title reveal">Grand Theft Auto<span>VI</span></h1>
@@ -41,7 +90,7 @@
             <p class="hero-tagline reveal">A Living City. Endless Possibilities.</p>
             <div class="hero-buttons reveal">
                 <button class="btn btn-primary" onclick="document.getElementById('access').scrollIntoView({behavior:'smooth'})">ACCESS EVENT</button>
-                <button class="btn btn-secondary" onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'})">EXPLORE THE WORLD</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('access').scrollIntoView({behavior:'smooth'})">WATCH TRAILER</button>
             </div>
         </div>
         <div class="scroll-hint">Scroll to explore</div>
@@ -50,10 +99,23 @@
     <section id="experience">
         <div class="section-header reveal">
             <span class="section-label">The Experience</span>
-            <h2 class="section-title">ENTER A WORLD WITHOUT LIMITS</h2>
-            <p class="section-desc">Explore a massive city filled with exciting locations, unforgettable moments, fast-paced action, and endless opportunities. Every journey is different, and every decision creates a new story.</p>
+            <h2 class="section-title">CINEMATIC SHOWCASE</h2>
+            <p class="section-desc">Experience the intensity of Grand Theft Auto VI with our exclusive gameplay trailer.</p>
         </div>
-        
+
+        <div class="hero-video-container reveal">
+            <video id="gtaVideo" controls preload="metadata">
+                <source src="GTA.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+
+        <div class="video-controls reveal">
+            <button class="video-btn" onclick="document.getElementById('gtaVideo').play()">▶ Play</button>
+            <button class="video-btn" onclick="document.getElementById('gtaVideo').pause()">⏸ Pause</button>
+            <button class="video-btn" onclick="document.getElementById('gtaVideo').currentTime = 0">⏮ Reset</button>
+        </div>
+
         <div class="features-luxury reveal">
             <div class="feature-card">
                 <div class="feature-num">01</div>
