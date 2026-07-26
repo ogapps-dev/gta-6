@@ -11,59 +11,242 @@
     <link rel="stylesheet" href="styles-part1.css">
     <link rel="stylesheet" href="styles-part2.css">
     <style>
-        .gta-font, .hero-title, .section-title, .nav-logo, .footer-logo {
+        .gta-font, .section-title, .nav-logo, .footer-logo {
             font-family: 'Druk Wide', sans-serif;
             font-weight: 700;
             letter-spacing: 0.02em;
         }
 
-        .hero-video-container {
+        .hero-title {
+            font-family: 'Druk Wide', sans-serif;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            display: none;
+        }
+
+        .hero-title-image {
+            max-width: 100%;
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Premium Video Section */
+        .video-showcase-section {
+            margin: 80px 0;
+            padding: 0;
+        }
+
+        .video-showcase-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .video-showcase-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #ff006e;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .video-showcase-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+            font-family: 'Druk Wide', sans-serif;
+        }
+
+        .video-showcase-desc {
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .premium-video-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .video-frame {
             position: relative;
             width: 100%;
             height: 0;
             padding-bottom: 56.25%;
             overflow: hidden;
-            margin: 40px 0;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            box-shadow: 0 25px 60px rgba(255, 0, 110, 0.2), 0 0 100px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0f1f 100%);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
-        .hero-video-container video {
+        .video-frame:hover {
+            box-shadow: 0 35px 80px rgba(255, 0, 110, 0.3), 0 0 120px rgba(0, 0, 0, 0.6);
+            border-color: rgba(255, 0, 110, 0.2);
+        }
+
+        .video-frame video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            border-radius: 11px;
         }
 
-        .video-controls {
+        .play-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .play-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #ff006e, #d62828);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: white;
+            box-shadow: 0 15px 40px rgba(255, 0, 110, 0.4);
+            transition: all 0.4s ease;
+            opacity: 1;
+        }
+
+        .video-frame video:playing ~ .play-overlay .play-icon {
+            opacity: 0;
+        }
+
+        /* Premium Controls */
+        .video-controls-premium {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            gap: 12px;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .video-btn {
-            background: linear-gradient(135deg, #ff006e, #d62828);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 5px;
+        .control-btn {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(255, 0, 110, 0.5);
+            background: transparent;
+            border-radius: 50%;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #ff006e;
             transition: all 0.3s ease;
+            overflow: hidden;
         }
 
-        .video-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(255, 0, 110, 0.4);
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: linear-gradient(135deg, #ff006e, #d62828);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            transition: width 0.3s ease, height 0.3s ease;
         }
 
-        .video-btn:active {
-            transform: translateY(0);
+        .control-btn:hover::before {
+            width: 100%;
+            height: 100%;
+        }
+
+        .control-btn:hover {
+            color: white;
+            border-color: #ff006e;
+            box-shadow: 0 8px 25px rgba(255, 0, 110, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .control-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .control-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 8px;
+            text-align: center;
+            font-weight: 600;
+            position: absolute;
+            bottom: -22px;
+            width: 100%;
+        }
+
+        .control-btn-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .video-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 50px;
+            padding-top: 50px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .stat {
+            flex: 1;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ff006e;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.6);
         }
     </style>
 </head>
@@ -81,41 +264,83 @@
     </nav>
 
     <section class="hero" id="hero">
-        <div class="hero-bg" style="background: url('gcover.jpg') center/cover no-repeat;"></div>
+        <div class="hero-bg" style="background: url('gbackground.jpg') center/cover no-repeat;"></div>
         <div class="hero-content">
             <div class="hero-badge">LIMITED EVENT</div>
-            <h1 class="hero-title reveal">Grand Theft Auto<span>VI</span></h1>
+            <h1 class="hero-title reveal"></h1>
+            <img src="gcover.jpg" alt="Grand Theft Auto VI" class="hero-title-image reveal" style="max-width: 500px;">
             <p class="hero-headline reveal">The Next Generation Open-World Experience</p>
             <p class="hero-desc reveal">Step into a city where every street tells a story, every choice creates new opportunities, and every journey is yours to shape.</p>
             <p class="hero-tagline reveal">A Living City. Endless Possibilities.</p>
             <div class="hero-buttons reveal">
                 <button class="btn btn-primary" onclick="document.getElementById('access').scrollIntoView({behavior:'smooth'})">ACCESS EVENT</button>
-                <button class="btn btn-secondary" onclick="document.getElementById('access').scrollIntoView({behavior:'smooth'})">WATCH TRAILER</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('experience').scrollIntoView({behavior:'smooth'})">WATCH TRAILER</button>
             </div>
         </div>
         <div class="scroll-hint">Scroll to explore</div>
     </section>
 
     <section id="experience">
+        <div class="video-showcase-section reveal">
+            <div class="video-showcase-header">
+                <span class="video-showcase-label">Cinematic Experience</span>
+                <h2 class="video-showcase-title">EXCLUSIVE GAMEPLAY FOOTAGE</h2>
+                <p class="video-showcase-desc">Witness the intensity and immersion of the next generation open-world adventure.</p>
+            </div>
+
+            <div class="premium-video-wrapper">
+                <div class="video-frame">
+                    <video id="gtaVideo" preload="metadata">
+                        <source src="GTA.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="play-overlay">
+                        <div class="play-icon">▶</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="video-controls-premium reveal">
+                <div class="control-btn-wrapper">
+                    <button class="control-btn" onclick="document.getElementById('gtaVideo').play()" title="Play">▶</button>
+                    <span class="control-label">Play</span>
+                </div>
+                <div class="control-btn-wrapper">
+                    <button class="control-btn" onclick="document.getElementById('gtaVideo').pause()" title="Pause">⏸</button>
+                    <span class="control-label">Pause</span>
+                </div>
+                <div class="control-btn-wrapper">
+                    <button class="control-btn" onclick="document.getElementById('gtaVideo').currentTime = 0" title="Reset">⏮</button>
+                    <span class="control-label">Reset</span>
+                </div>
+                <div class="control-btn-wrapper">
+                    <button class="control-btn" onclick="toggleFullscreen()" title="Fullscreen">⛶</button>
+                    <span class="control-label">Fullscreen</span>
+                </div>
+            </div>
+
+            <div class="video-stats">
+                <div class="stat">
+                    <div class="stat-number">4K</div>
+                    <div class="stat-label">Resolution</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">60fps</div>
+                    <div class="stat-label">Smooth Gameplay</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">Cinematic</div>
+                    <div class="stat-label">Production Quality</div>
+                </div>
+            </div>
+        </div>
+
         <div class="section-header reveal">
             <span class="section-label">The Experience</span>
-            <h2 class="section-title">CINEMATIC SHOWCASE</h2>
-            <p class="section-desc">Experience the intensity of Grand Theft Auto VI with our exclusive gameplay trailer.</p>
+            <h2 class="section-title">ENTER A WORLD WITHOUT LIMITS</h2>
+            <p class="section-desc">Explore a massive city filled with exciting locations, unforgettable moments, fast-paced action, and endless opportunities. Every journey is different, and every decision creates a new story.</p>
         </div>
-
-        <div class="hero-video-container reveal">
-            <video id="gtaVideo" controls preload="metadata">
-                <source src="GTA.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
-        </div>
-
-        <div class="video-controls reveal">
-            <button class="video-btn" onclick="document.getElementById('gtaVideo').play()">▶ Play</button>
-            <button class="video-btn" onclick="document.getElementById('gtaVideo').pause()">⏸ Pause</button>
-            <button class="video-btn" onclick="document.getElementById('gtaVideo').currentTime = 0">⏮ Reset</button>
-        </div>
-
+        
         <div class="features-luxury reveal">
             <div class="feature-card">
                 <div class="feature-num">01</div>
@@ -380,5 +605,15 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        function toggleFullscreen() {
+            const video = document.getElementById('gtaVideo');
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.webkitRequestFullscreen) {
+                video.webkitRequestFullscreen();
+            }
+        }
+    </script>
 </body>
 </html>
